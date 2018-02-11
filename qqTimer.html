@@ -1,20 +1,5 @@
 ﻿
-<!-- 
-    This is a slightly modified version of QQtimer for streaming that writes to files.
-    I pulled this version of QQ timer in january 2018, but the updates should work with any version as they are very minor.
-
-    The updates create text files in a directory of your choosing. The text files contain data for best/current single, MO3, Avg5, Avg12, etc. 
-    Additionally there is a time list and a short time list, which contains a fixed number of recent times.
-
-    The point of these files is to be used with OBS streaming software. The software can read from text files, which allows you to setup the information in any way you want. See Twitch.Tv/HaysCubing for exmples.
-
-    Since javascript doesn't naturally write to local files, these edits use ActiveX with internet explorer. You must run the timer in internet explorer and allow ActiveX to be used. The timer must be run locally.
-     
-    To use. Go to QQtimer.com. Right click -> Save as, and save to a local file. Either replace the file "qqtimer.html" with this file, or just make the small edits manually.
-    Replace 'FileRootPath' below with chosen file on your own computer, then open "qqtimer.html" with intenet explorer.
-
-    All necessary edits for this will be labeled with "WriteToFile" in the comments.
-    -->
+<!-- saved from url=(0024)https://www.qqtimer.net/ -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <title>qqTimer</title>
@@ -48,6 +33,7 @@ var nightMode = false;
 
 function $(str) { return document.getElementById(str); }
 
+
 // WriteToFile - function to write to file
 function WriteToFile(Path, Content) {
     var fso = new ActiveXObject("Scripting.FileSystemObject");
@@ -61,8 +47,10 @@ function WriteToFile(Path, Content) {
     txtFile.Close();
 }
 // WriteToFile - End function
-
-var FileRootPath = "C:\\Users\\TestUser\\Desktop\\TestFiles\\"; // WriteToFile - personal root path. REPLACE WITH ROOT PATH ON PERSONAL COMPUTER. For javascript, must use 2 backslashed between directories.
+var FilePath = String(window.location);
+var RootPath = FilePath.substring(8, FilePath.lastIndexOf("/"));
+var UpdatedRootPath = RootPath.replace(/\//g, "\\")
+var FileRootPath = UpdatedRootPath + "\\Files\\";
 
 var ShortTimeListLength = 12;
 
@@ -1031,9 +1019,8 @@ function getStats(recalc) {
   s += pretty(sessionavg[0]) + "<\/span> (&sigma; = " + trim(sessionavg[1], 2) + ")<br>session mean: " + pretty(sessionmean);
  }
 
-
 // WriteToFile - start writing best/current
-// Single
+// Single time
 var prettyBestTime = pretty(bestTime);
 if (prettyBestTime == "DNF") {
     WriteToFile(FileRootPath + "BestTime.txt", "----");
