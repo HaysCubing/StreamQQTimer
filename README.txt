@@ -6,7 +6,7 @@ The updates create text files in a directory of your choosing. The text files co
 
 The primary purpose of this is to be used for cube streaming. OBS software can pick up text files to display on stream. This allows you to format the output in whatever way you want, and not to be dependant on how the timer formats the times.
 
-test
+
 
 Since javascript doesn't naturally write to local files, these edits use ActiveX with internet explorer. You must run the timer in internet explorer and allow ActiveX to be used. The timer must be run locally.
      
